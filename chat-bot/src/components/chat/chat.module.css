@@ -1,0 +1,33 @@
+.Chat{
+    display: flex;
+    flex-direction: column;
+}
+
+.ChatContainer {
+  background-color: #3a3a3a;
+  min-height: 75vh;
+  border-radius: 15px;
+  border: 1px solid greenyellow;
+}
+
+
+
+.InputContainer {
+  display: flex;
+  margin-top: auto;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 2px;
+}
+
+.UserInput {
+    height: 34px;
+    border-radius: 15px;
+    margin-right: 3px;
+    flex-grow: 1;
+    padding: 0px 10px 0px 10px;
+}
+
+.MessageIcon {
+  height: 34px;
+}

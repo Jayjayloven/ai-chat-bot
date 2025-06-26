@@ -1,0 +1,20 @@
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.Logo {
+  width: 64px;
+  height: 64px;
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Title {
+  margin: 0px;
+}
