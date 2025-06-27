@@ -21,11 +21,12 @@
 }
 
 .UserInput {
-  height: 34px;
+  min-height: 34px;
   border-radius: 15px;
   margin-right: 3px;
   flex-grow: 1;
-  padding: 0px 10px 0px 10px;
+  padding: 10px 10px 0px 10px;
+  resize: vertical;
 }
 
 .SendIcon {
@@ -34,18 +35,20 @@
 
 .UserChat {
   background-color: gray;
-  justify-self: end;
+  margin-left: auto;
   margin-right: 3px;
-  text-align: start;
+  padding: 10px 10px 10px 10px;
 }
 
 .AIChat {
   background-color: #3a3a3a;
-  justify-self: start;
+  margin-right: auto;
   margin-left: 3px;
+  padding-right: 100px;
 }
 
-.UserChat, .AIChat {
+.UserChat,
+.AIChat {
   width: fit-content;
   border-radius: 20px;
   padding: 8px 8px;

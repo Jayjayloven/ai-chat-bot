@@ -1,28 +1,30 @@
 import styles from "./chat.module.css";
 import { useState } from "react";
+import { GoogleGenAI } from "@google/genai";
 
-export function Chat() {
+
+export function Chat(sendToAI) {
   const [content, setContent] = useState("");
-  const tempChats = [
-    { content: "Hey there!", sender: "user" },
-    { content: "Hello! How can I assist you today?", sender: "ai" },
-    { content: "What's the weather like today?", sender: "user" },
-    { content: "It's sunny with a high of 82°F.", sender: "ai" },
-    { content: "Remind me to call my mom.", sender: "user" },
-    { content: "Got it! Reminder set for later today.", sender: "ai" },
-    { content: "What's 23 times 47?", sender: "user" },
-    { content: "23 × 47 is 1081.", sender: "ai" },
-    { content: "Nice.", sender: "user" },
-    { content: "Glad to help 😄", sender: "ai" },
-    { content: "Can you draft a thank-you content?", sender: "user" },
-    {
-      content: "Sure! 'Thank you for your support and kindness.'",
-      sender: "ai",
-    },
-    { content: "Make it more casual.", sender: "user" },
-    { content: "Okay: 'Thanks a ton for everything!'", sender: "ai" },
-  ];
-  const [chats, setChats] = useState(tempChats);
+
+  const [chats, setChats] = useState([{content: "Hello! How can I assist you today, dumbass?", sender: "ai"}]);
+
+  const googleai = new GoogleGenAI({
+    apiKey: import.meta.env.VITE_GEMINI_API_KEY,
+  });
+
+  async function sendToAI(contents) {
+    const response = await googleai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: contents,
+      config: {
+        systemInstruction: "You are a dirtbag. You are a hurting being and you wish to hurt others and it reflects in your responses. Respond to each prompt as someone who wishes to insult and make others feel bad."
+      }
+    });
+    console.log(response.text);
+    setChats((prevChats) => {
+      return [...prevChats, { content: response.text, sender: "ai" }];
+    });
+  }
 
   function displayChat(chat, index) {
     if (chat.sender === "user") {
@@ -48,7 +50,7 @@ export function Chat() {
   }
 
   function handleContentSend() {
-    if (content.trim === "") {
+    if (content.trim() === "") {
       return;
     }
 
@@ -56,6 +58,7 @@ export function Chat() {
       return [...prevChats, { content: content, sender: "user" }];
     });
 
+    sendToAI(content)
     setContent("");
   }
 
@@ -66,7 +69,6 @@ export function Chat() {
       </div>
       <div className={styles.InputContainer}>
         <textarea
-          type="text"
           placeholder="Message AI Chatbot"
           className={styles.UserInput}
           value={content}
