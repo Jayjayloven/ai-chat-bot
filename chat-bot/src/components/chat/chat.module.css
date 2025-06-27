@@ -28,6 +28,26 @@
   padding: 0px 10px 0px 10px;
 }
 
-.MessageIcon {
+.SendIcon {
   height: 34px;
+}
+
+.UserChat {
+  background-color: gray;
+  justify-self: end;
+  margin-right: 3px;
+  text-align: start;
+}
+
+.AIChat {
+  background-color: #3a3a3a;
+  justify-self: start;
+  margin-left: 3px;
+}
+
+.UserChat, .AIChat {
+  width: fit-content;
+  border-radius: 20px;
+  padding: 8px 8px;
+  font-size: x-small;
 }
