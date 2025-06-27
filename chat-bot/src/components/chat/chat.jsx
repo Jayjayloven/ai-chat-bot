@@ -2,11 +2,12 @@ import styles from "./chat.module.css";
 import { useState } from "react";
 import { GoogleGenAI } from "@google/genai";
 
-
 export function Chat(sendToAI) {
   const [content, setContent] = useState("");
 
-  const [chats, setChats] = useState([{content: "Hello! How can I assist you today, dumbass?", sender: "ai"}]);
+  const [chats, setChats] = useState([
+    { content: "Hello! How can I assist you today, dumbass?", sender: "ai" },
+  ]);
 
   const googleai = new GoogleGenAI({
     apiKey: import.meta.env.VITE_GEMINI_API_KEY,
@@ -17,8 +18,9 @@ export function Chat(sendToAI) {
       model: "gemini-2.5-flash",
       contents: contents,
       config: {
-        systemInstruction: "You are a dirtbag. You are a hurting being and you wish to hurt others and it reflects in your responses. Respond to each prompt as someone who wishes to insult and make others feel bad."
-      }
+        systemInstruction:
+          "You are a dirtbag. You are a hurting being and you wish to hurt others and it reflects in your responses. Respond to each prompt as someone who wishes to insult and make others feel bad. Be very prafane, vulgar, and obscene",
+      },
     });
     console.log(response.text);
     setChats((prevChats) => {
@@ -58,8 +60,14 @@ export function Chat(sendToAI) {
       return [...prevChats, { content: content, sender: "user" }];
     });
 
-    sendToAI(content)
+    sendToAI(content);
     setContent("");
+  }
+
+  function handleEnterSubmission(event) {
+    if (event.key === "Enter") {
+      handleContentSend();
+    }
   }
 
   return (
@@ -73,6 +81,7 @@ export function Chat(sendToAI) {
           className={styles.UserInput}
           value={content}
           onChange={handleContentChange}
+          onKeyDown={handleEnterSubmission}
         />
         <img
           src="/send-icon.png"
