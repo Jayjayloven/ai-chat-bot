@@ -19,3 +19,7 @@
 .Title {
   margin: 0px;
 }
+
+.Main {
+  display: flex;
+}

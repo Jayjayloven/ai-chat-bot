@@ -31,7 +31,7 @@
   max-width: 800px;
   border-radius: 15px;
   border: 1px solid greenyellow;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .InputContainer {

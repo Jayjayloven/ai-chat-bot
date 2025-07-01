@@ -1,4 +1,5 @@
 import styles from "./chat.module.css";
+import Markdown from "react-markdown";
 import { useEffect, useState, useRef } from "react";
 import { GoogleGenAI } from "@google/genai";
 
@@ -20,15 +21,14 @@ export function Chat() {
     }
   }, [chats]);
 
-  useEffect(()=> {}, [])
+  useEffect(() => {}, []);
 
   async function sendToAI(content) {
+    setLoading(true);
     const response = await googleai.models.generateContentStream({
       model: "gemini-2.5-flash",
       contents: content,
     });
-    
-    setLoading(true );
 
     for await (const chunk of response) {
       console.log(chunk);
@@ -68,10 +68,9 @@ export function Chat() {
     }
     if (chat.sender === "ai") {
       return (
-        <p className={styles.AIChat} key={index} ref={newestChatRef}>
-          {" "}
-          {chat.content}{" "}
-        </p>
+        <div key={index} className={styles.AIChat} ref={newestChatRef}>
+          <Markdown>{chat.content}</Markdown>
+        </div>
       );
     }
   }
@@ -104,7 +103,7 @@ export function Chat() {
     <div className={styles.Chat}>
       <div className={styles.ChatContainer}>
         {chats.map((chat, index) => displayChat(chat, index))}
-        {loading && (<div className={styles.Loader}></div>)}
+        {loading && <div className={styles.Loader}></div>}
       </div>
       <div className={styles.InputContainer}>
         <textarea
@@ -113,13 +112,15 @@ export function Chat() {
           value={content}
           onChange={handleContentChange}
           onKeyDown={handleEnterSubmission}
-          />
-        <img
+        />
+        <input
+          type="image"
           src="/send-icon.png"
           alt=""
           className={styles.SendIcon}
           onClick={handleContentSend}
-          />
+          disabled={loading}
+        />
       </div>
     </div>
   );

@@ -1,10 +1,6 @@
-import { GoogleGenAI } from "@google/genai";
 import styles from "./App.module.css";
 import { Chat } from "./components/chat/chat";
-import { useEffect } from "react";
-
-
-
+import { Sidebar } from "./components/Sidebar/sidebar";
 
 function App() {
   return (
@@ -13,7 +9,10 @@ function App() {
         <img src="/chat-bot.png" alt="" className={styles.Logo} />
         <h4 className={styles.Title}>AI SUPER AIRMAN</h4>
       </section>
+      <div className={styles.Main}>
+      <Sidebar></Sidebar>
       <Chat></Chat>
+      </div>
     </div>
   );
 }
