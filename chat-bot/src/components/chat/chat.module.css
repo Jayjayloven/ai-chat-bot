@@ -43,9 +43,8 @@
 
 .AIChat {
   background-color: #3a3a3a;
-  margin-right: auto;
+  margin-right: 100px;
   margin-left: 3px;
-  padding-right: 100px;
 }
 
 .UserChat,
@@ -53,5 +52,5 @@
   width: fit-content;
   border-radius: 20px;
   padding: 8px 8px;
-  font-size: x-small;
+  font-size: small;
 }
