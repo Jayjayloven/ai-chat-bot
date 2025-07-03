@@ -13,9 +13,10 @@
   margin-bottom: 5px;
 }
 
-.PrevChatButton:hover, .PrevChatButton::selection {background-color: #3a3a3a;}
+.PrevChatButton:hover, .PrevChatButton:active {background-color: #3a3a3a;}
 
 
 .NewChatButton {
     background-color: #3a3a3a;
+    border-radius: 10px
 }
